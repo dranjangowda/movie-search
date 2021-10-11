@@ -10,8 +10,13 @@ async function searchMovie(event){
     try{
         let res = await fetch(`https://www.omdbapi.com/?t=${movie}&apikey=b0bcbcfb`)
         let data = await res.json()
-       console.log(data)
-
+        console.log(data.Response)
+        if(data.Response === "False"){
+            let h1 = document.createElement("h1")
+            h1.setAttribute("id","errorMsg")
+            h1.innerText= `your search --( ${movie} )--  did not match any results`
+            posterContainer.append(h1)
+        }else if(data.Response === "True"){
        let title = document.createElement("p")
        title.innerText = "TITLE --- " + data.Title
        discription.append(title)
@@ -30,6 +35,8 @@ async function searchMovie(event){
        let imdbRating = document.createElement("p")
        imdbRating.innerText = "IMDB RATING --- " + data.imdbRating;
        discription.append(imdbRating)
+        }
+
     }
     catch(err){
         console.log("error")
