@@ -3,6 +3,8 @@ let discription = document.getElementById("discription")
 
 async function searchMovie(event){
     event.preventDefault()
+    posterContainer.innerHTML = null
+    discription.innerHTML = null
    let movie =  document.getElementById("movie").value
 
     try{
